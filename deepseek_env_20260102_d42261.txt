@@ -1,4 +1,0 @@
-DB_URL=postgresql://postgres:YOUR_REAL_PASSWORD_HERE@db.gipwsubbfdxbobsfwfes.supabase.co:5432/postgres
-CLERK_SECRET_KEY=your_clerk_secret_key_here
-CLERK_WEBHOOK_SECRET=your_clerk_webhook_secret_here
-PORT=5000
