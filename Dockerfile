@@ -9,7 +9,7 @@ WORKDIR /app
 COPY backend/package*.json ./
 
 # 2. Install production dependencies only
-RUN npm ci --only=production
+RUN npm install --only=production
 
 # 3. Copy the TypeScript configuration
 COPY backend/tsconfig.json ./
