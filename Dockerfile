@@ -5,7 +5,7 @@ WORKDIR /app
 COPY backend/ ./
 
 # 2. Install production dependencies
-RUN npm install --only=production
+RUN npm install 
 
 # 3. Build the TypeScript code
 RUN npm run build
