@@ -37,9 +37,12 @@ app.get('/health', (req, res) => {
 // PROTECTED ROUTES
 app.get('/api/feed/next', clerkAuth, async (req: Request, res: Response) => {
   let client: PoolClient | undefined;
-  try {
+  try { 
     const userId = (req as any).userId;
     client = await pool.connect();
+    if (!client) {
+        throw new Error('Failed to obtain database client');
+    }
     
     // First try to serve existing questions
     const feedQuery = `
@@ -66,12 +69,15 @@ app.get('/api/feed/next', clerkAuth, async (req: Request, res: Response) => {
       }));
       
       // Update times_shown
-      const updatePromises = feedResult.rows.map(row => 
-        client.query(
+    const updatePromises = feedResult.rows.map(row => { 
+        if (!client) {
+        throw new Error('Failed to obtain database client');
+    }
+       return client.query(
           'UPDATE generated_questions SET times_shown = times_shown + 1 WHERE id = $1',
           [row.id]
-        )
-      );
+        );
+    });
       await Promise.all(updatePromises);
       
       return res.json(questions);
@@ -121,7 +127,9 @@ app.get('/api/feed/next', clerkAuth, async (req: Request, res: Response) => {
         bloom_level: q.bloom_level,
         difficulty: q.difficulty
       };
-
+if (!client) {
+        throw new Error('Failed to obtain database client');
+    }
       await client.query(
         `INSERT INTO generated_questions (id, chunk_id, question_data, question_type, difficulty, engagement_score, times_shown, correct_rate)
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
