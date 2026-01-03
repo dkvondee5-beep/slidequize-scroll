@@ -36,7 +36,7 @@ app.get('/health', (req, res) => {
 
 // PROTECTED ROUTES
 app.get('/api/feed/next', clerkAuth, async (req: Request, res: Response) => {
-  let client;
+  let client: PoolClient | undefined;
   try {
     const userId = (req as any).userId;
     client = await pool.connect();
