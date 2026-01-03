@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Pool, Client } from 'pg';
+import { Pool, PoolClient } from 'pg';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import axios from 'axios';
@@ -149,7 +149,7 @@ app.post('/api/interaction', clerkAuth, async (req: Request, res: Response) => {
     return res.status(400).json({ error: 'Missing required fields' });
   }
   
-  let client: Client | undefined;
+  let client: PoolClient | undefined;
   try {
     client = await pool.connect();
     await client.query(
