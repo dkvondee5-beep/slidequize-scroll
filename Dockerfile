@@ -1,24 +1,14 @@
-# Use the official Node.js 18 Alpine image (small and secure)
 FROM node:18-alpine
-
-# Set the working directory inside the container
 WORKDIR /app
 
-# 1. Copy ONLY the package.json and package-lock.json first
-# This allows Docker to cache the dependency installation layer
-COPY backend/package*.json ./
+# 1. COPY EVERYTHING from backend first. This cache-busts the layer.
+COPY backend/ ./
 
-# 2. Install production dependencies only
+# 2. Install production dependencies
 RUN npm install --only=production
 
-# 3. Copy the TypeScript configuration
-COPY backend/tsconfig.json ./
-
-# 4. Copy the entire backend source code
-COPY backend/src ./src
-
-# 5. Build the TypeScript code into JavaScript
+# 3. Build the TypeScript code
 RUN npm run build
 
-# 6. Define the command to run the application
+# 4. Start the application
 CMD ["node", "dist/index.js"]
