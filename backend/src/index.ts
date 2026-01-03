@@ -14,10 +14,7 @@ const port = process.env.PORT || 5000;
 
 // PostgreSQL connection pool - UPDATED FOR SUPABASE
 const pool = new Pool({
-  connectionString: process.env.DB_URL,
-  ssl: {
-    rejectUnauthorized: false  // Required for Supabase
-  }
+  connectionString: process.env.DATABASE_URL,
 });
 
 // Middleware
