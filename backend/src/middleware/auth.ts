@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { Pool } from 'pg';
+import { Pool, PoolClient } from 'pg';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -39,7 +39,7 @@ export const clerkAuth = async (req: Request, res: Response, next: NextFunction)
 };
 
 export const syncUserToDatabase = async (clerkUserId: string, email: string, username?: string) => {
-  const client = await pool.connect();
+  const client: PoolClient  = await pool.connect();
   try {
     const userCheck = await client.query(
       'SELECT id FROM users WHERE auth_provider_id = $1',
