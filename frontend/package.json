@@ -25,7 +25,7 @@
     "@clerk/clerk-expo": "^1.2.0",
     "nativewind": "^2.0.11",
     "tailwindcss": "^3.3.0",
-    "expo-secure-store": "~12.0.1"
+    "expo-secure-store": "~12.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
