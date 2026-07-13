@@ -8,6 +8,7 @@ import FeedScreen from './src/screens/FeedScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import { tokenCache } from './src/components/tokenCache';
+import { Platform } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +25,7 @@ function MainTabs() {
 
 export default function App() {
   return (
-    <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
+    <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={Platform.OS === 'web' ? undefined : tokenCache}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <SafeAreaProvider>
           <NavigationContainer>
