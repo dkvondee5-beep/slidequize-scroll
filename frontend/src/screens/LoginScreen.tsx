@@ -106,7 +106,7 @@ export default function LoginScreen() {
       >
         <View style={styles.card}>
           <Text style={styles.title}>🔐 Login Screen</Text>
-          <Text style={styles.subtitle}>Please sign in to save your quiz progress.</Text>
+          <Text style={styles.subtitle}>Login Screen TEST.</Text>
 
           <Text style={styles.label}>Email</Text>
           <TextInput
