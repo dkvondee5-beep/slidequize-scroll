@@ -25,7 +25,7 @@ function MainTabs() {
 
 export default function App() {
   return (
-    <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={Platform.OS === 'web' ? undefined : tokenCache}>
+    <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <SafeAreaProvider>
           <NavigationContainer>
